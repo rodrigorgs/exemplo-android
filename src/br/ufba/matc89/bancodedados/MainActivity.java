@@ -1,8 +1,10 @@
 package br.ufba.matc89.bancodedados;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -19,4 +21,11 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	public void inserir(View v) {
+		Log.d("teste", "inserir");
+	}
+	
+	public void removerPrimeiro(View v) {
+		Log.d("teste", "removerPrimeiro");
+	}
 }

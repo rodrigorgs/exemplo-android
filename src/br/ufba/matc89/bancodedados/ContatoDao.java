@@ -1,5 +1,6 @@
 package br.ufba.matc89.bancodedados;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -24,7 +25,7 @@ public class ContatoDao {
 	
 	public List<Contato> getAll() {
 		// TODO
-		return null;
+		return new ArrayList<Contato>();
 	}
 	
 	public void insert(Contato contato) {

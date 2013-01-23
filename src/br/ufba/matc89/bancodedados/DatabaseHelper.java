@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE contato(" +
 				"  _id INTEGER PRIMARY KEY AUTOINCREMENT," +
 				"  nome TEXT," +
-				"  telefone TEXT");
+				"  telefone TEXT);");
 	}
 
 	@Override

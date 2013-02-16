@@ -7,16 +7,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	EditText editNome;
 	EditText editTelefone;
 	ListView listView;
-	ArrayAdapter<Contato> listAdapter;
+	ContatoAdapter listAdapter;
 	ContatoDao contatoDao;
 	
 	@Override
@@ -35,11 +33,7 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		contatoDao.open();
 		
-		listAdapter = new ArrayAdapter<Contato>(
-				this,
-				android.R.layout.activity_list_item,
-				android.R.id.text1,
-				contatoDao.getAll());
+		listAdapter = new ContatoAdapter(this, contatoDao.getAll());
 		listView.setAdapter(listAdapter);
 		
 		super.onResume();

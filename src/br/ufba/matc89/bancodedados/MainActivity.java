@@ -7,14 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	EditText editNome;
 	EditText editTelefone;
-	TextView textContatos;
-	
+	ListView listView;
+	ArrayAdapter<Contato> listAdapter;
 	ContatoDao contatoDao;
 	
 	@Override
@@ -24,15 +26,22 @@ public class MainActivity extends Activity {
 		
 		editNome = (EditText)findViewById(R.id.editNome);
 		editTelefone = (EditText)findViewById(R.id.editTelefone);
-		textContatos = (TextView)findViewById(R.id.textContatos);
-		
+		listView = (ListView)findViewById(R.id.listView);
+				
 		contatoDao = new ContatoDao(this);
 	}
 
 	@Override
 	protected void onResume() {
 		contatoDao.open();
-		atualizarContatos();
+		
+		listAdapter = new ArrayAdapter<Contato>(
+				this,
+				android.R.layout.activity_list_item,
+				android.R.id.text1,
+				contatoDao.getAll());
+		listView.setAdapter(listAdapter);
+		
 		super.onResume();
 	}
 	
@@ -50,14 +59,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void atualizarContatos() {
-		String s = "";
-		
 		List<Contato> list = contatoDao.getAll();
-		for (Contato contato : list) {
-			s += contato.toString();
-		}
 		
-		textContatos.setText(s);
+		listAdapter.clear();
+		listAdapter.addAll(list);
 	}
 	
 	public void inserir(View v) {

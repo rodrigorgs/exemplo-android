@@ -16,18 +16,29 @@ public class ContatoAdapter extends ArrayAdapter<Contato> {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = null;
+		View view = convertView;
 		
 		Contato contato = getItem(position);
 		if (contato != null) {
-			LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(android.R.layout.simple_list_item_2, null);
-			TextView text1 = (TextView)view.findViewById(android.R.id.text1);
-			TextView text2 = (TextView)view.findViewById(android.R.id.text2);
-			text1.setText(contato.getNome());
-			text2.setText(contato.getTelefone());
+			if (view == null) {
+				LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = inflater.inflate(android.R.layout.simple_list_item_2, null);
+				
+				ViewHolder holder = new ViewHolder();
+				holder.textNome = (TextView)view.findViewById(android.R.id.text1);
+				holder.textTelefone = (TextView)view.findViewById(android.R.id.text2);
+				view.setTag(holder);
+			}
+			ViewHolder holder = (ViewHolder)view.getTag();
+			holder.textNome.setText(contato.getNome());
+			holder.textTelefone.setText(contato.getTelefone());
 		}
 		
 		return view;
+	}
+	
+	static class ViewHolder {
+		public TextView textNome;
+		public TextView textTelefone;
 	}
 }

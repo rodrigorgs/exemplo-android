@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -27,6 +28,10 @@ public class MainActivity extends Activity {
 		listView = (ListView)findViewById(R.id.listView);
 				
 		contatoDao = new ContatoDao(this);
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.
+				ThreadPolicy.Builder().permitAll().build();
+				StrictMode.setThreadPolicy(policy); 
 	}
 
 	@Override

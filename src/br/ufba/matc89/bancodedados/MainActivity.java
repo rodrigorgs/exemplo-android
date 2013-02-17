@@ -82,4 +82,12 @@ public class MainActivity extends Activity {
 		
 		atualizarContatos();
 	}
+	
+	public void download(View v) {
+		
+	}
+	
+	public void upload(View v) {
+		
+	}
 }

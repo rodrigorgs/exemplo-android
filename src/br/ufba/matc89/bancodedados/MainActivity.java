@@ -84,7 +84,11 @@ public class MainActivity extends Activity {
 	}
 	
 	public void download(View v) {
-		
+		ContatoResource res = new ContatoResource();
+		List<Contato> contatos = res.getContatos();
+		for (Contato contato : contatos)
+			contatoDao.insert(contato);
+		atualizarContatos();
 	}
 	
 	public void upload(View v) {

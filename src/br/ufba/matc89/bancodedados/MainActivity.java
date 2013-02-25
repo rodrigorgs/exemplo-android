@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 		atualizarContatos();
 	}
 	
-	public void download(View v) {
+	public void download(View v) throws Exception {
 		ContatoResource res = new ContatoResource();
 		List<Contato> contatos = res.getContatos();
 		

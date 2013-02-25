@@ -24,7 +24,7 @@ public class ContatoResource {
 	public List<Contato> getContatos() {
 		List<Contato> contatos = new ArrayList<Contato>();
 		
-		String url = "http://rubyrest.rodrigorgs.c9.io/contatos";
+		String url = "http://contatos-rest.herokuapp.com/contatos";
 		try {
 			String contatosStr = getUrl(url);
 			JSONArray array = new JSONArray(contatosStr);

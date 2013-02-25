@@ -96,7 +96,12 @@ public class MainActivity extends Activity {
 		atualizarContatos();
 	}
 	
-	public void upload(View v) {
+	public void upload(View v) throws Exception {
+		String nome = editNome.getText().toString();
+		String telefone = editTelefone.getText().toString();
+		Contato contato = new Contato(0, nome, telefone);
 		
+		ContatoResource res = new ContatoResource();
+		res.insertContato(contato);		
 	}
 }

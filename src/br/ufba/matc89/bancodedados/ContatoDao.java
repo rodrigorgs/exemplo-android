@@ -57,4 +57,8 @@ public class ContatoDao {
 	public void remove(Contato contato) {
 		db.delete("contato", "_id = " + contato.getId(), null);
 	}
+	
+	public void removeAll() {
+		db.delete("contato", null, null);
+	}
 }

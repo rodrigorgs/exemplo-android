@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	EditText editNome;
@@ -91,8 +92,11 @@ public class MainActivity extends Activity {
 	public void download(View v) {
 		ContatoResource res = new ContatoResource();
 		List<Contato> contatos = res.getContatos();
+		
+		contatoDao.removeAll();
 		for (Contato contato : contatos)
 			contatoDao.insert(contato);
+		
 		atualizarContatos();
 	}
 	
@@ -102,6 +106,10 @@ public class MainActivity extends Activity {
 		Contato contato = new Contato(0, nome, telefone);
 		
 		ContatoResource res = new ContatoResource();
-		res.insertContato(contato);		
+		Long id = res.insertContato(contato);
+		
+		Toast.makeText(this, 
+				"Criado contato com id = " + id, 
+				Toast.LENGTH_SHORT).show();
 	}
 }

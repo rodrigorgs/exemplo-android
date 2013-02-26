@@ -3,6 +3,9 @@ package br.ufba.matc89.bancodedados;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -90,6 +93,11 @@ public class MainActivity extends Activity {
 	}
 	
 	public void download(View v) throws Exception {
+		if (!isNetworkAvailable()) {
+			Toast.makeText(this, "Sem conex‹o", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
 		ContatoResource res = new ContatoResource();
 		List<Contato> contatos = res.getContatos();
 		
@@ -101,6 +109,11 @@ public class MainActivity extends Activity {
 	}
 	
 	public void upload(View v) throws Exception {
+		if (!isNetworkAvailable()) {
+			Toast.makeText(this, "Sem conex‹o", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
 		String nome = editNome.getText().toString();
 		String telefone = editTelefone.getText().toString();
 		Contato contato = new Contato(0, nome, telefone);
@@ -112,4 +125,16 @@ public class MainActivity extends Activity {
 				"Criado contato com id = " + id, 
 				Toast.LENGTH_SHORT).show();
 	}
+	
+	public boolean isNetworkAvailable() {
+	    ConnectivityManager cm = (ConnectivityManager) 
+	      getSystemService(Context.CONNECTIVITY_SERVICE);
+
+	    NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+	    if (networkInfo != null && networkInfo.isConnected()) {
+	        return true;
+	    }
+	    return false;
+	} 
 }
